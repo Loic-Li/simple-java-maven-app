@@ -9,6 +9,7 @@ pipeline {
 
         stage('Release tag') {
             environment {
+                PATH = "/opt/apache-maven-3.9.9/bin:$PATH"
                 GIT_TAG = "Version-1.$BUILD_NUMBER"
             }
             steps {
