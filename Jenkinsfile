@@ -1,15 +1,17 @@
 pipeline {
     agent any
+    environment {
+        PATH = "/opt/apache-maven-3.9.9/bin:$PATH"  // Ajoutez cette ligne pour inclure Maven dans le PATH
+    }
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn -B -DskipTests clean package'
             }
         }
 
         stage('Release tag') {
             environment {
-                PATH = "/opt/apache-maven-3.9.9/bin:$PATH"
                 GIT_TAG = "Version-1.$BUILD_NUMBER"
             }
             steps {
